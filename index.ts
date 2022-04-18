@@ -30,6 +30,6 @@ app.use(router.allowedMethods());
 
 console.log("> Listening on http://localhost:8000");
 
-await app.listen({ port: 80 });
+await app.listen();
 
 console.log("REEEEEE")
