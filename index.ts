@@ -7,7 +7,9 @@ router
     context.response.body = `Hello world! ${moment().format("YYYY-MM-DD")}`;
   })
   .get("/shrt/:urlid", (context) => {
-    const urls = JSON.parse(Deno.readTextFileSync("./urls.json"));
+     const jsonResponse = await fetch("https://raw.githubusercontent.com/YogPanjarale/deno-url-shortener/master/urls.json");
+     const jsonData = await jsonResponse.json();
+     const urls = JSON.parse(jsonData);
 
     if (context.params && context.params.urlid && urls[context.params.urlid]) {
       if (
@@ -28,6 +30,6 @@ app.use(router.allowedMethods());
 
 console.log("> Listening on http://localhost:8000");
 
-await app.listen({ port: 8000 });
+await app.listen({ port: 80 });
 
 console.log("REEEEEE")
